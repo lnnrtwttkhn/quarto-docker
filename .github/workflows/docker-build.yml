@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - 'Dockerfile'
+      - 'Dockerfile.quarto'
 
 jobs:
   build:
@@ -35,7 +35,7 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t $IMAGE_NAME:${{ steps.vars.outputs.hash }} .
+          docker build -f Dockerfile.quarto -t $IMAGE_NAME:${{ steps.vars.outputs.hash }} .
 
       - name: Push Docker image
         run: |
