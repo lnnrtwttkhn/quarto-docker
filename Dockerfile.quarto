@@ -17,4 +17,3 @@ RUN rm quarto-linux-amd64.deb
 
 # Default command
 CMD ["bash"]
-
