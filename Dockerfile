@@ -1,0 +1,20 @@
+# Start from a minimal R-based image that supports Ubuntu 20.04
+FROM eddelbuettel/r2u:20.04
+
+# Install only the required system dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    pandoc \
+    pandoc-citeproc \
+    curl \
+    gdebi-core \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Quarto using the official Debian package
+ARG QUARTO_VERSION="1.6.32"
+RUN curl -o quarto-linux-amd64.deb -L https://github.com/quarto-dev/quarto-cli/releases/download/v${QUARTO_VERSION}/quarto-${QUARTO_VERSION}-linux-amd64.deb
+RUN gdebi --non-interactive quarto-linux-amd64.deb
+RUN rm quarto-linux-amd64.deb
+
+# Default command
+CMD ["bash"]
+
